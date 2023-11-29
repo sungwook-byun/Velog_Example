@@ -1,5 +1,2 @@
 ﻿  main.cpp
-C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main.cpp(33,11): error C2371: 'number': 재정의. 기본 형식이 다릅니다.
-  C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main.cpp(22,7):
-  'number' 선언을 참조하십시오.
-  
+  51th_c++.vcxproj -> C:\Users\qustj\Desktop\Study\51th_c++\x64\Debug\51th_c++.exe
