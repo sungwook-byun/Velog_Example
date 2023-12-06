@@ -4,6 +4,9 @@
     <Filter Include="Main">
       <UniqueIdentifier>{55c35275-31cf-47e1-92a7-0e2a1d5fdd1e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{6ef79fe6-4be2-4fdc-aaea-3aca4e9d0cfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,5 +27,19 @@
     <ClCompile Include="main4.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="main5.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main6.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="math.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
