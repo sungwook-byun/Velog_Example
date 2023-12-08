@@ -36,6 +36,21 @@
     <ClCompile Include="math.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="Exercise-main4.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercise-main5,6.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main7.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="exam.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="exam2.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">
