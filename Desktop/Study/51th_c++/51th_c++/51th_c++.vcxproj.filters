@@ -45,10 +45,16 @@
     <ClCompile Include="main7.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="exam.cpp">
+    <ClCompile Include="Lotto.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="exam2.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="InOut.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main8.cpp">
       <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
