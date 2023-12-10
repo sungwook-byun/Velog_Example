@@ -14,5 +14,8 @@
     <ClCompile Include="1.Multiplication_Table.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="2.Status_abnormality.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
