@@ -17,5 +17,11 @@
     <ClCompile Include="2.Status_abnormality.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="3.Factorial_Fibonacci.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="4.BubbleSort_Lotto.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
