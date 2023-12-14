@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 #define BLEED 1   // 0x1
 #define SLOW  2	  // 0x2
 #define STURN 4   // 0x4

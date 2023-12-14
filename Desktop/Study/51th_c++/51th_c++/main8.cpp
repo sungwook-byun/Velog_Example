@@ -88,7 +88,7 @@ int main()
 	}
 
 	// 포인터 선언시 자료형의 의미
-	{
+	{	
 		char c;
 		int i = 0;
 		long long ll = 0;
@@ -157,12 +157,6 @@ int main()
 		pMyData->s = 10;
 		pMyData->c1 = 10;
 	}
-	`
-
-
-
-
-
 
 
 
