@@ -57,6 +57,21 @@
     <ClCompile Include="main8.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="main9.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main10.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main11.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main12.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main13.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">

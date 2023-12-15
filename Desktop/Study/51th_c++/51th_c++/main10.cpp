@@ -72,8 +72,8 @@ int main()
 
 
 	{
-		int a = 0;
-		int b = 0;
+		int a = 10;
+		int b = 20;
 
 		// 포인터 변수 자체가 상수화됨
 		int* const pInt = &a;
@@ -91,12 +91,7 @@ int main()
 		// 가르키고 있는 원본을 수정할수도 없음
 		const int* const pInt3 = &a;
 
-		
-
 	}
-
-
-
 
 	return 0;
 }
