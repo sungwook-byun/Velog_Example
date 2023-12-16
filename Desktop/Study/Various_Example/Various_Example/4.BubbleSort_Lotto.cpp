@@ -1,6 +1,6 @@
 #include<stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include<cstdlib>
+#include<ctime>
  
 // 로또의 복권번호는 6개니까 6으로 설정
 #define Size 6
