@@ -72,9 +72,21 @@
     <ClCompile Include="main13.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="main14.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="DArr.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="main15.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DArr.h">
       <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
