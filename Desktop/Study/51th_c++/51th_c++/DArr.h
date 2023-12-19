@@ -16,4 +16,4 @@ void InitDArr(DArr* _pArr);
 
 void PushData(DArr* _pArr, int _Data);
 
-void Realloc(DArr* _pArr);
+int GetData(DArr* _pArr, int _Idx);

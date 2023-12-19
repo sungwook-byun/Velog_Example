@@ -7,6 +7,9 @@
     <Filter Include="Math">
       <UniqueIdentifier>{6ef79fe6-4be2-4fdc-aaea-3aca4e9d0cfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DArr">
+      <UniqueIdentifier>{401e748d-eb28-4ac3-9844-28b2ce07d761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -76,10 +79,13 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="DArr.cpp">
-      <Filter>Math</Filter>
+      <Filter>DArr</Filter>
     </ClCompile>
     <ClCompile Include="main15.cpp">
-      <Filter>Math</Filter>
+      <Filter>DArr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\LinkedList.cpp">
+      <Filter>DArr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -87,7 +93,10 @@
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="DArr.h">
-      <Filter>Math</Filter>
+      <Filter>DArr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\LinkedList.h">
+      <Filter>DArr</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
