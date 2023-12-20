@@ -84,7 +84,7 @@
     <ClCompile Include="main15.cpp">
       <Filter>DArr</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\LinkedList.cpp">
+    <ClCompile Include="LinkedList.cpp">
       <Filter>DArr</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,7 +95,7 @@
     <ClInclude Include="DArr.h">
       <Filter>DArr</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\LinkedList.h">
+    <ClInclude Include="LinkedList.h">
       <Filter>DArr</Filter>
     </ClInclude>
   </ItemGroup>
