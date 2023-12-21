@@ -74,24 +74,28 @@ void PushFront(LinkedList* _List, int _Data)
 // 재귀 함수
 void Reverse_Re(Node* _Node, LinkedList* _List)
 {
-	if (nullptr != _Node->pNext)
+	// 재귀호출을 멈추기 위한 조건
+	if (_Node == nullptr) 
 	{
-		bool bHead = false;
-		if (_Node == _List->pHeadNode)
-			bHead = true;
-
-		Reverse_Re(_Node->pNext, _List);
-
-		_Node->pNext->pNext = _Node;
-
-		if (bHead)
-			_Node->pNext = nullptr;
+		return;
 	}
-	else
+	// 다음노드가 0이라는건 마지막 노드라는걸 의미하고, 그렇다면 그 노드를 헤드 노드인 시작노드로 설정함
+	if (_Node->pNext == nullptr) 
 	{
-		// _Node 가 가리키고 있는 노드가 현재 가장 마지막 노드이다.
 		_List->pHeadNode = _Node;
+		return;
 	}
+
+	// 재귀함수를 호출함으로써 계속해서 다음 노드로 이동하면서 끝까지 이동함
+	// 두번째 값을 불러오고 그 다음 또 호출 된다면 _Node 3번째 값을 불러오는 식으로 계속 호출을 함
+	// 하지만 중요한건 위에 조건인 _Node->pNext가 null인지가 중요하기 때문에 그때까지 반복해서 들어감
+	Reverse_Re(_Node->pNext, _List);
+
+	// 노드들의 방향이 뒤집힘
+	_Node->pNext->pNext = _Node;
+
+	// 현재 노드의 다음을 널로 비워야함 (마지막노드이기 때문)
+	_Node->pNext = nullptr;
 }
 
 

@@ -87,6 +87,9 @@
     <ClCompile Include="LinkedList.cpp">
       <Filter>DArr</Filter>
     </ClCompile>
+    <ClCompile Include="main16.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">

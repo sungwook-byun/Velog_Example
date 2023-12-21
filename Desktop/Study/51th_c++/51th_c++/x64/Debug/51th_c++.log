@@ -1,2 +1,3 @@
-﻿  main15.cpp
+﻿  main16.cpp
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main16.cpp(38,9): warning C4552: '+': 식의 결과가 사용되지 않습니다.
   51th_c++.vcxproj -> C:\Users\qustj\Desktop\Study\51th_c++\x64\Debug\51th_c++.exe
