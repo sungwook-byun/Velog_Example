@@ -10,6 +10,9 @@
     <Filter Include="DArr">
       <UniqueIdentifier>{401e748d-eb28-4ac3-9844-28b2ce07d761}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CArr">
+      <UniqueIdentifier>{db1e604a-3abc-4ba4-9293-092185b20b9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,14 +84,32 @@
     <ClCompile Include="DArr.cpp">
       <Filter>DArr</Filter>
     </ClCompile>
-    <ClCompile Include="main15.cpp">
-      <Filter>DArr</Filter>
-    </ClCompile>
     <ClCompile Include="LinkedList.cpp">
       <Filter>DArr</Filter>
     </ClCompile>
     <ClCompile Include="main16.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main17.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main18.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main19.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="reference.cpp">
+      <Filter>CArr</Filter>
+    </ClCompile>
+    <ClCompile Include="CArr.cpp">
+      <Filter>CArr</Filter>
+    </ClCompile>
+    <ClCompile Include="main15.cpp">
+      <Filter>DArr</Filter>
+    </ClCompile>
+    <ClCompile Include="main20.cpp">
+      <Filter>CArr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>DArr</Filter>
+    </ClInclude>
+    <ClInclude Include="CArr.h">
+      <Filter>CArr</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
