@@ -14,6 +14,7 @@ void Insertion_Sort(int* _Random_Arr, int _ElementCoust)
 		for (j = i; j > 0 && _Random_Arr[j - 1] > temp; --j)  // [0]의 값이 [1]보다 큰지를 비교하고 크다면 for문을 돌림
 		{
 			_Random_Arr[j] = _Random_Arr[j - 1]; // [1]의 값에 [0]을 밀어서 넣어버림
+		;	_Random_Arr[j - 1] = temp; // 아래 문장 대신 이렇게 짜도 결과가 같음 근데 값을 넣는 방식이 아닌 비교해서 마지막에 넣는게 더 효율적이라고 생각함
 		}
 		_Random_Arr[j] = temp; // --로 인해 j가 감소하고 [0]에 Temp안에 저장되어있던 값인 최초의 [1]을 넣어줌
 	} 

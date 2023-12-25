@@ -9,6 +9,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{e397bb46-2640-48f9-8a72-25e5c8b34d52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example2">
+      <UniqueIdentifier>{7bedfc7b-04d2-4c44-b620-9b125c8f641b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exam3">
+      <UniqueIdentifier>{202c1099-4e58-4a82-9e1b-8f115643955f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="exam4">
+      <UniqueIdentifier>{05120d4d-9945-45f1-b4a5-7adac44c9dcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1.Multiplication_Table.cpp">
@@ -53,10 +65,46 @@
     <ClCompile Include="example.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DArr.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="LinkedList.cpp">
+      <Filter>example2</Filter>
+    </ClCompile>
+    <ClCompile Include="main2.cpp">
+      <Filter>example2</Filter>
+    </ClCompile>
+    <ClCompile Include="main3.cpp">
+      <Filter>exam3</Filter>
+    </ClCompile>
+    <ClCompile Include="DArr2.cpp">
+      <Filter>exam3</Filter>
+    </ClCompile>
+    <ClCompile Include="CArr.cpp">
+      <Filter>exam4</Filter>
+    </ClCompile>
+    <ClCompile Include="main4.cpp">
+      <Filter>exam4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="6-2.Extern.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="DArr.h">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>example2</Filter>
+    </ClInclude>
+    <ClInclude Include="DArr2.h">
+      <Filter>exam3</Filter>
+    </ClInclude>
+    <ClInclude Include="CArr.h">
+      <Filter>exam4</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
