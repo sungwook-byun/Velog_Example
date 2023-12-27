@@ -1,15 +1,25 @@
 #pragma once
 
 
+// 클래스 템플릿
+template<typename T>
 class CArr
 {
 private:
-	int* m_pData;
+	T* m_pData;
 	int		m_MaxCount;
 	int		m_CurCount;
 
 public:
-	void push_back(int _Data);
+	void push_back(const T& _Data);
+
+	class iterator;
+	iterator begin()
+	{
+		iterator iter(this, 0);
+		return iter;
+	}
+
 
 private:
 	void Realloc();
@@ -28,16 +38,91 @@ private:
 public:
 	int size() { return m_CurCount; }
 	int capacity() { return m_MaxCount; }
-	int at(int _Idx) { return m_pData[_Idx]; }
+	T at(int _Idx) { return m_pData[_Idx]; }
 
 	// 반환타입을 참조형태로 반환, 반환된 값을 수정하면 원본값이 수정되는 개념
-	int& operator[](int _Idx) 
-	{ 
-		return m_pData[_Idx];
-	}
+	T& operator[](int _Idx) { return m_pData[_Idx]; }
 
 
 public:
 	CArr();
 	~CArr();
+
+	// 1. 반복자가 접근하려는 데이터를 관리하는 컨테이너의 private 에 손쉽게 접근이 가능
+	// 2. 컨테이너 구분없이 동일한 이름을 가져서 반복자 역할 클래스의 이름을 손쉽게 알 수 있게 통일 시킴
+	//    (이너클래스가 선언된 컨테이너 클래스가 각각 다르기 때문에 이름 중복문제가 발생하지 않는다.)
+	class iterator
+	{
+	private:
+		CArr<T>* m_pOwner;
+		int			m_Idx;
+
+	public:
+		iterator()
+			: m_pOwner(nullptr)
+			, m_Idx(-1)
+		{
+		}
+
+		iterator(CArr<T>* _Owner, int _idx)
+			: m_pOwner(_Owner)
+			, m_Idx(_idx)
+		{}
+
+		~iterator()
+		{
+		}
+
+
+	};
 };
+
+template<typename T>
+CArr<T>::CArr()
+	: m_pData(nullptr)
+	, m_CurCount(0)
+	, m_MaxCount(2)
+{
+	//m_pData = (int*)malloc(sizeof(int) * m_MaxCount);
+	m_pData = new T[m_MaxCount];
+}
+
+template<typename T>
+CArr<T>::~CArr()
+{
+	//free(m_pData);
+	delete[] m_pData;
+}
+
+template<typename T>
+void CArr<T>::push_back(const T& _Data)
+{
+	// 데이터가 꽉 차있으면, 
+	if (m_MaxCount <= m_CurCount)
+	{
+		// 저장 공간 추가할당
+		Realloc();
+	}
+
+	m_pData[m_CurCount++] = _Data;
+}
+
+template<typename T>
+void CArr<T>::Realloc()
+{
+	// 1. 새로운 공간 할당
+	m_MaxCount *= 2;
+	T* pNew = new T[m_MaxCount];
+
+	// 2. 기존 데이터 이동
+	for (int i = 0; i < m_CurCount; ++i)
+	{
+		pNew[i] = m_pData[i];
+	}
+
+	// 3. 기존 공간 해제
+	delete[] m_pData;
+
+	// 4. 새로운 공간을 가리킨다.
+	m_pData = pNew;
+}

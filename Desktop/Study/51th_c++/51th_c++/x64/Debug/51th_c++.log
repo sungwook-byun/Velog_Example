@@ -1,3 +1,4 @@
-﻿  main16.cpp
-C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main16.cpp(38,9): warning C4552: '+': 식의 결과가 사용되지 않습니다.
+﻿  main21.cpp
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main21.cpp(66,15): warning C4834: [[nodiscard]] 특성이 포함된 함수의 반환 값을 버리는 중입니다.
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main21.cpp(67,19): warning C4834: [[nodiscard]] 특성이 포함된 함수의 반환 값을 버리는 중입니다.
   51th_c++.vcxproj -> C:\Users\qustj\Desktop\Study\51th_c++\x64\Debug\51th_c++.exe

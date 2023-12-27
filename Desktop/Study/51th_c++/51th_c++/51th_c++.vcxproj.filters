@@ -11,7 +11,7 @@
       <UniqueIdentifier>{401e748d-eb28-4ac3-9844-28b2ce07d761}</UniqueIdentifier>
     </Filter>
     <Filter Include="CArr">
-      <UniqueIdentifier>{db1e604a-3abc-4ba4-9293-092185b20b9f}</UniqueIdentifier>
+      <UniqueIdentifier>{0f006a17-4f60-4ec1-86bf-d3d1a5b8e467}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -99,14 +99,14 @@
     <ClCompile Include="main19.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="reference.cpp">
-      <Filter>CArr</Filter>
-    </ClCompile>
-    <ClCompile Include="CArr.cpp">
-      <Filter>CArr</Filter>
-    </ClCompile>
     <ClCompile Include="main15.cpp">
       <Filter>DArr</Filter>
+    </ClCompile>
+    <ClCompile Include="main21.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="reference.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="main20.cpp">
       <Filter>CArr</Filter>
