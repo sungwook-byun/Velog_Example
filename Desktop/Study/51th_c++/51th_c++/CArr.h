@@ -1,5 +1,6 @@
 #pragma once
 
+#include <assert.h>
 
 // 클래스 템플릿
 template<typename T>
@@ -20,6 +21,11 @@ public:
 		return iter;
 	}
 
+	iterator end()
+	{
+		iterator iter(this, -1);
+		return iter;
+	}
 
 private:
 	void Realloc();
@@ -56,6 +62,50 @@ public:
 	private:
 		CArr<T>* m_pOwner;
 		int			m_Idx;
+
+	public:
+		T& operator *()
+		{
+			return	m_pOwner->m_pData[m_Idx];
+		}
+
+		bool operator == (const iterator& _otheriter)
+		{
+			if (m_pOwner == _otheriter.m_pOwner && m_Idx == _otheriter.m_Idx)
+				return true;
+			else
+				return false;
+		}
+
+		bool operator != (const iterator& _otheriter)
+		{
+			return !((*this) == _otheriter);
+		}
+
+		void operator ++()
+		{
+			if (m_pOwner && -1 == m_Idx)
+			{
+				// end iteartor 에 ++ 함수를 호출한 경우
+				assert(nullptr);
+			}
+
+			++m_Idx;
+
+			// end iterator - iterator 가 컨테이너가 보유한 데이터의 마지막 다음을 가리키는 상태
+			if (m_pOwner->m_CurCount <= m_Idx)
+			{
+				m_Idx = -1;
+			}
+		}
+
+		void operator --()
+		{
+			--m_Idx;
+		}
+
+
+
 
 	public:
 		iterator()

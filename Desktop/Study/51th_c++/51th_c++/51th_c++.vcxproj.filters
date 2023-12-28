@@ -13,6 +13,9 @@
     <Filter Include="CArr">
       <UniqueIdentifier>{0f006a17-4f60-4ec1-86bf-d3d1a5b8e467}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Iter">
+      <UniqueIdentifier>{d353a6cd-f49d-4442-860a-264885b3379a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="main20.cpp">
       <Filter>CArr</Filter>
+    </ClCompile>
+    <ClCompile Include="main22.cpp">
+      <Filter>Iter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
