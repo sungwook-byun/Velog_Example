@@ -16,6 +16,9 @@
     <Filter Include="Iter">
       <UniqueIdentifier>{d353a6cd-f49d-4442-860a-264885b3379a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="List">
+      <UniqueIdentifier>{e6403854-2815-49c3-9971-8f130a400583}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -117,6 +120,9 @@
     <ClCompile Include="main22.cpp">
       <Filter>Iter</Filter>
     </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">
@@ -129,7 +135,10 @@
       <Filter>DArr</Filter>
     </ClInclude>
     <ClInclude Include="CArr.h">
-      <Filter>CArr</Filter>
+      <Filter>Iter</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>List</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
