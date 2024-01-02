@@ -45,73 +45,65 @@ public:
 
 };
 
+
 List<CharInfo> charlist;
-list<CharInfo> stdcharlist;
 
 int main()
 {
+	int a = 10;
+	++(++(++a));
+
 	//CharInfo(L"Warrior", 100, 30, 50) - 임시객체, 이름없는 지역변수
 	charlist.push_back(CharInfo(L"Warrior", 100, 30, 50));
 	charlist.push_back(CharInfo(L"Archer", 80, 50, 40));
 	charlist.push_back(CharInfo(L"Wizzard", 50, 100, 20));
 
-	stdcharlist.push_back(CharInfo(L"Warrior", 100, 30, 50));
-	stdcharlist.push_back(CharInfo(L"Archer", 80, 50, 40));
-	stdcharlist.push_back(CharInfo(L"Wizzard", 50, 100, 20));
+	List<CharInfo>::iterator listiter;
 
-	list<CharInfo>::iterator listiter;
+	listiter = charlist.begin();
+	const CharInfo& info = *listiter;
 
-	listiter = stdcharlist.begin();
-	--listiter;
+	// 자기자신을 반환하게 만들었기 때문에, 다시 ++ 함수를 재 호출 가능
+	++(++(++listiter));
 
-	for (listiter = stdcharlist.begin(); listiter != stdcharlist.end(); ++listiter)
-	{
-		std::wcout << (*listiter).szName << std::endl;
-	}
+	// 후위 연산자
+	int i = 0;
+	int i2 = ++i;
 
-	listiter = stdcharlist.begin();
-	++listiter;
-
-	// list 의 insert 함수 테스트
-	stdcharlist.insert(listiter, CharInfo(L"Berserker", 80, 10, 80));
-	const CharInfo& info = (*listiter);
-
-	// list 의 erase 함수 테스트
-	// Warrior - Berserker - (Archer) - Wizzard
-	listiter = stdcharlist.begin();
-	++listiter;
-	++listiter;
-
-	listiter = stdcharlist.erase(listiter);
-	const CharInfo& charinfo = *listiter;
+	List<CharInfo>::iterator listiter2;
+	listiter = charlist.begin();
+	listiter2 = listiter++;
 
 
-	// erase 문제
-	vector<int> vecInt;
-	for (int i = 0; i < 100; ++i)
-	{
-		// 1 ~ 100 까지 입력
-		vecInt.push_back(i + 1);
-	}
+	// insert 함수 테스트
+	List<CharInfo> CharList;
+	CharList.push_back(CharInfo(L"Warrior", 100, 30, 50));
+	CharList.push_back(CharInfo(L"Archer", 80, 50, 40));
+	CharList.push_back(CharInfo(L"Wizzard", 50, 100, 20));
 
-	// erase 사용하는 경우 iterator 가 문제가 되지 않게, 삭제된 다음 iterator 를 돌려받는 구조
-	// 따라서 반복문에서 iterator 를 매번 ++ 하는 경우 erase 함수와 중복되어서 
-	// 가리키는 요소를 두번 증가하게 될 수 있다.
-	vector<int>::iterator veciter = vecInt.begin();
-	for (; veciter != vecInt.end(); )
-	{
-		if ((*veciter) <= 50)
-		{
-			veciter = vecInt.erase(veciter);
-		}
-		else
-		{
-			++veciter;
-		}
-	}
+	// Warrior 를 가리킴
+	List<CharInfo>::iterator iter = CharList.begin();
 
+	// Warrior 에 Theif 를 insert 함( 카운트 4, iter 는 theif 를 가리킴)
+	// iter = CharList.insert(iter, CharInfo(L"Theif", 60, 30, 100));
+
+	// Archer 가리킴
+	// 카운트 4, iter 는 theif 를 가리킴, W -> T -> A -> Wi
+	++iter;
+	iter = CharList.insert(iter, CharInfo(L"Theif", 60, 30, 100));
+
+
+	// erase 테스트
 
 
 
 	return 0;
 }
+
+
+
+// 1. DArr::iterator ++, -- 연산자 함수 마무리하기
+//  - 예외처리
+//  - 반환타입 처리
+//  - 후위 연산자 버전 구현
+//  - 함수 별로 이미지 캡처, 제목

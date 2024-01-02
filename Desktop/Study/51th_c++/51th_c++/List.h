@@ -42,10 +42,10 @@ public:
 
 
 	// _targetIter 가 가리키는곳에 _Data 를 저장시키고, 새로 저장한 데이터를 가리키는 iterator 를 반환해준다.
-	// iterator insert(iterator _targetIter, const T& _Data);
+	iterator insert(iterator _targetIter, const T& _Data);
 
 	// _targetIter 가 가리키는 데이터를 삭제하고, 삭제한 다음을 가리키는 iterator 를 반환
-	// iterator erase(iterator _targetIter);
+	iterator erase(iterator _targetIter);
 
 
 public:
@@ -86,18 +86,40 @@ public:
 
 		// 1. ++, -- 반환타입 문제
 		// 2. ++, -- 후위연산자 문제
-		void operator ++()
+		iterator& operator ++()
 		{
 			// enditerator 에서 ++ 하는 경우
 			assert(m_Owner && m_TargetNode);
 			m_TargetNode = m_TargetNode->pNext;
+
+			return *this;
 		}
 
-		void operator --()
+		iterator operator++(int)
+		{
+			iterator copyiter = *this;
+
+			++(*this);
+
+			return copyiter;
+		}
+
+		iterator& operator --()
 		{
 			assert(m_Owner && m_TargetNode);
-			assert(m_Owner->m_pHead != m_TargetNode); // iterator 가 begin 이다.			
+			assert(m_Owner->m_pHead != m_TargetNode); // iterator 가 begin 이다.
 			m_TargetNode = m_TargetNode->pPrev;
+
+			return *this;
+		}
+
+		iterator operator --(int)
+		{
+			iterator copyiter = *this;
+
+			++(*this);
+
+			return copyiter;
 		}
 
 		bool operator == (const iterator& _otheriter)
@@ -126,6 +148,8 @@ public:
 
 		~iterator()
 		{}
+
+		friend class List<T>;
 	};
 };
 
@@ -165,4 +189,59 @@ inline void List<T>::push_front(const T& _Data)
 
 	m_pHead = pNewNode;
 	++m_CurCount;
+}
+
+
+// 반환타입이 이너클래스인 경우 앞에 typename 을 붙여주어야 한다.
+template<typename T>
+typename List<T>::iterator List<T>::insert(iterator _targetIter, const T& _Data)
+{
+	// iterator 가 해당 리스트가 소유한 데이터를 가리키는 상태인지 확인
+	assert(_targetIter.m_Owner == this);
+
+	// insert 위치가 맨 처음이라면, push_front 로 처리한다.
+	if (m_pHead == _targetIter.m_TargetNode)
+	{
+		// insert 위치를 맨 앞으로 지정했기 때문에 push_front 와 동일한 효과이다.
+		push_front(_Data);
+
+		// push_front 가 끝나고 나면 m_pHead 에 새로운 데이터를 저장하는 노드의 주소가 들어있다.
+		return iterator(this, m_pHead);
+	}
+	else
+	{
+		// 1. 입력되는 데이터를 저장하는 노드를 만든다.
+		// 2. 새로 생성된 노드가 _targetIter 가 가리키는 노드를 다음으로 가리킨다.
+		// 3. 새로 생성된 노드가 _targetIter 가 가리키는 노드의 이전을, 이전으로 가리킨다.		
+		Node<T>* pNewNode = new Node<T>(_Data, _targetIter.m_TargetNode, _targetIter.m_TargetNode->pPrev);
+
+		// 4. _targetIter 의 이전 노드로 가서, 그 노드가 새로 생성된 노드를 Next 로 지정하게 한다.
+		_targetIter.m_TargetNode->pPrev->pNext = pNewNode;
+
+		// 5. _targetIter 가 가리키는 노드의 이전을 새로 생성된 노드로 지정한다.
+		_targetIter.m_TargetNode->pPrev = pNewNode;
+
+		// 6. 데이터 카운트 증가
+		++m_CurCount;
+
+		// 7. 새로운 노드를 가리키는 iterator 를 만들어서 반환
+		return iterator(this, pNewNode);
+	}
+}
+
+template<typename T>
+typename List<T>::iterator List<T>::erase(iterator _targetIter)
+{
+	// 데이터 카운트 감소
+
+	// _targetIter 가 가리키고 있는 노드(삭제할 노드)
+	// 삭제할 노드 이전노드의 Next 를 삭제할 노드 Next 로 교체
+	// 삭제할 노드 다음 노드의 Prev 를 삭제할 노드 Prev 로 교체
+
+	// 예외상황(삭제할 노드가 Head 이거나 Tail 인 경우)
+
+	// _targetIter 가 가리키고 있는 노드를 delete(동적할당 해제)
+
+	// 삭제된 노드의 다음을 가리키는 iterator 를 반환해준다.
+	return iterator();
 }

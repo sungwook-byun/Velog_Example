@@ -49,9 +49,16 @@ int main()
 	data = *iter;*/
 
 	iter = arrFloat.begin();
-	for (; iter != arrFloat.end(); ++iter)
-	{
-		cout << *iter << endl;
-	}
+
+	iter = iter++;
+
+	cout << *iter << endl;
+
+	//for (; iter != arrFloat.end(); ++iter)
+	//{
+	//	cout << *iter << endl;
+	//}
+
+
 	return 0;
 }

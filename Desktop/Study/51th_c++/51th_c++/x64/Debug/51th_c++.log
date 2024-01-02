@@ -1,4 +1,4 @@
 ﻿  main22.cpp
-C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main22.cpp(27,10): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
-C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main22.cpp(30,17): warning C4101: 'in' :참조되지 않은 지역 변수입니다.
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main22.cpp(32,10): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\main22.cpp(35,17): warning C4101: 'in' :참조되지 않은 지역 변수입니다.
   51th_c++.vcxproj -> C:\Users\qustj\Desktop\Study\51th_c++\x64\Debug\51th_c++.exe

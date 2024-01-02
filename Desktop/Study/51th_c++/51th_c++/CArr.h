@@ -81,8 +81,8 @@ public:
 		{
 			return !((*this) == _otheriter);
 		}
-
-		void operator ++()
+	
+		iterator& operator ++()
 		{
 			if (m_pOwner && -1 == m_Idx)
 			{
@@ -97,13 +97,36 @@ public:
 			{
 				m_Idx = -1;
 			}
+			return *this;
 		}
 
-		void operator --()
+		iterator& operator --()
 		{
-			--m_Idx;
+			if (m_pOwner && 0 == m_Idx)
+			{
+				// begin iteartor 에 -- 함수를 호출한 경우
+				assert(nullptr);
+			}
+			return *this;
 		}
 
+		iterator operator ++(int)
+		{
+			iterator CopyIter = *this;
+
+			++(*this);
+
+			return CopyIter;
+		}
+
+		iterator operator --(int)
+		{
+			iterator CopyIter = *this;
+
+			++(*this);
+
+			return CopyIter;
+		}
 
 
 
