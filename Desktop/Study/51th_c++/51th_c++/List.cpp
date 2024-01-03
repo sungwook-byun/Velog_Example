@@ -84,18 +84,26 @@ int main()
 	// Warrior 를 가리킴
 	List<CharInfo>::iterator iter = CharList.begin();
 
-	// Warrior 에 Theif 를 insert 함( 카운트 4, iter 는 theif 를 가리킴)
-	// iter = CharList.insert(iter, CharInfo(L"Theif", 60, 30, 100));
+	// Warrior 에 Theif 를 insert 함( 카운트 4, iter 는 Thief 를 가리킴)
+	// iter = CharList.insert(iter, CharInfo(L"Thief", 60, 30, 100));
 
 	// Archer 가리킴
-	// 카운트 4, iter 는 theif 를 가리킴, W -> T -> A -> Wi
+	// 카운트 4, iter 는 Thief 를 가리킴, W -> T -> A -> Wi
 	++iter;
-	iter = CharList.insert(iter, CharInfo(L"Theif", 60, 30, 100));
-
+	iter = CharList.insert(iter, CharInfo(L"Thief", 60, 30, 100));
 
 	// erase 테스트
+	// Warrior -> Thief -> Archer -> Wizzard
+	iter = CharList.begin();
 
+	/*int size = CharList.size();
+	for (int i = 0; i < size; ++i)
+	{
+		CharList.erase(CharList.begin());
+	}*/
 
+	iter = CharList.end();
+	--iter;
 
 	return 0;
 }

@@ -33,7 +33,7 @@ private:
 public:
 	void push_back(const T& _Data);
 	void push_front(const T& _Data);
-
+	int size() { return m_CurCount; }
 
 	class iterator;
 
@@ -106,9 +106,20 @@ public:
 
 		iterator& operator --()
 		{
-			assert(m_Owner && m_TargetNode);
+			assert(m_Owner);
 			assert(m_Owner->m_pHead != m_TargetNode); // iterator 가 begin 이다.
-			m_TargetNode = m_TargetNode->pPrev;
+
+			if (nullptr == m_TargetNode)
+			{
+				// 현재 iterator 가 end 상태인데 -- 함수가 호출된 경우
+				// 마지막 노드를 가리키게 한다.
+				m_TargetNode = m_Owner->m_pTail;
+			}
+			else
+			{
+				// 현재 가리키고 있는 노드의 이전 노드를 가리키게 한다.
+				m_TargetNode = m_TargetNode->pPrev;
+			}
 
 			return *this;
 		}
@@ -232,16 +243,55 @@ typename List<T>::iterator List<T>::insert(iterator _targetIter, const T& _Data)
 template<typename T>
 typename List<T>::iterator List<T>::erase(iterator _targetIter)
 {
-	// 데이터 카운트 감소
+	// iterator 가 해당 리스트가 소유한 데이터를 가리키는 상태인지 확인
+	assert(_targetIter.m_Owner == this);
 
-	// _targetIter 가 가리키고 있는 노드(삭제할 노드)
-	// 삭제할 노드 이전노드의 Next 를 삭제할 노드 Next 로 교체
-	// 삭제할 노드 다음 노드의 Prev 를 삭제할 노드 Prev 로 교체
 
-	// 예외상황(삭제할 노드가 Head 이거나 Tail 인 경우)
+	// _targetIter 가 가리키고 있는 노드(삭제할 노드)		
+	if (_targetIter.m_TargetNode == m_pHead)
+	{
+		// 예외상황(삭제할 노드가 Head 인 경우)
+		// 두번째 노드를 새로운 헤드로 지정
+		m_pHead = _targetIter.m_TargetNode->pNext;
+
+		if (m_pHead == nullptr)
+		{
+			// 리스트안에 데이터가 1개였다면,(삭제할 노드가 처음이자 마지막 노드였다)
+			m_pTail = nullptr;
+		}
+		else
+		{
+			// 새롭게 지정된 헤드노드의 이전을 nullptr 로 바꾼다(삭제될 노드를 가리키고 있기 때문에)
+			m_pHead->pPrev = nullptr;
+		}
+	}
+	else if (_targetIter.m_TargetNode == m_pTail)
+	{
+		// 삭제할 노드의 이전을 새로운 Tail 로 지정
+		m_pTail = _targetIter.m_TargetNode->pPrev;
+
+		// 새로 지정된 Tail 노드의 Next 를 null 로 바꿈
+		m_pTail->pNext = nullptr;
+	}
+
+	// 삭제할 노드가 Head 도 아니고 Tail 도 아니다(중간이다)
+	else
+	{
+		// 삭제할 노드 이전노드의 Next 를 삭제할 노드 Next 로 교체
+		_targetIter.m_TargetNode->pPrev->pNext = _targetIter.m_TargetNode->pNext;
+
+		// 삭제할 노드 다음 노드의 Prev 를 삭제할 노드 Prev 로 교체
+		_targetIter.m_TargetNode->pNext->pPrev = _targetIter.m_TargetNode->pPrev;
+	}
+
+	// 삭제된 노드의 다음을 가리키는 iterator 를 만든다.
+	iterator nextiter(this, _targetIter.m_TargetNode->pNext);
 
 	// _targetIter 가 가리키고 있는 노드를 delete(동적할당 해제)
+	delete _targetIter.m_TargetNode;
 
-	// 삭제된 노드의 다음을 가리키는 iterator 를 반환해준다.
-	return iterator();
+	// 데이터 카운트 감소
+	--m_CurCount;
+
+	return nextiter;
 }

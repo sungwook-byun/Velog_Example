@@ -1,0 +1,72 @@
+#include <iostream>
+
+#include <set>
+#include <map>
+using std::set;
+using std::map;
+using std::make_pair;
+
+
+
+
+
+
+// 그래프 - 노드간의 연결관계를 표현
+
+// 트리 - 순환이 불가능한 그래프
+
+// 이진트리 - 자식의 개수를 2개로 제한한 트리
+
+// 이진탐색트리 - 입력 데이터를 크기에 따라 좌우(작은것을 왼쪽, 큰것을 오른쪽)로 정렬하는 트리
+
+
+// 탐색
+// 순차 탐색 O(N)
+// 이진 탐색 O(logN)
+// - 데이터가 정렬되어있어야 한다.
+// - N(문제의 크기) 을 절반씩 줄여나가는 방식
+
+// 컨테이너		 vector			list			  map,set
+// 자료구조		동적배열		연결형 리스트		   이진탐색트리
+// 입력			 O(1)			O(1)			 O(logN)
+// 삭제			 O(N)			O(1)			 O(1)
+// 인덱싱		 O(1)			O(N)			 O(N)
+// 탐색			 O(N)			O(N)			 O(logN)
+
+int main()
+{
+	set<int> intset;
+
+	intset.insert(100);
+
+	intset.insert(150);
+	intset.insert(170);
+	intset.insert(125);
+
+	intset.insert(80);
+	intset.insert(90);
+	intset.insert(50);
+
+	//			100
+	//		   /	\
+	//		80		 150
+	//		/\		 /\
+	//	  50  90  125	170
+
+	// find 함수는 입력된 데이터랑 동일한 데이터가 있는지 찾아서 그 데이터를 가리키는 iterator 를 반환.
+	// 만약 해당 데이터가 컨테이너 안에 없었으면, end iterator 를 반환
+	set<int>::iterator iter = intset.find(125);
+	iter = intset.find(124);
+	if (iter != intset.end())
+	{
+
+	}
+	else
+	{
+
+	}
+
+
+
+	return 0;
+}
