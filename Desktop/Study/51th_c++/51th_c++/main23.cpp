@@ -1,13 +1,29 @@
 #include <iostream>
 
+#include "BST.h"
+
+
+template<typename T1, typename T2>
+class MyTemplateClass
+{
+	T1	m_Data1;
+	T2  m_Data2;
+};
+
+MyTemplateClass<int, float> obj;
+
+
+
+
+
 #include <set>
 #include <map>
 using std::set;
 using std::map;
 using std::make_pair;
 
-
-
+// 퀵소트, 머지소트, 힙소트
+// O(N logN)
 
 
 
@@ -19,6 +35,9 @@ using std::make_pair;
 
 // 이진탐색트리 - 입력 데이터를 크기에 따라 좌우(작은것을 왼쪽, 큰것을 오른쪽)로 정렬하는 트리
 
+// Self Balanced Binary Search Tree
+// 자가균형 이진탐색트리
+// Red-Black, AVL
 
 // 탐색
 // 순차 탐색 O(N)
@@ -52,7 +71,6 @@ int main()
 	//		80		 150
 	//		/\		 /\
 	//	  50  90  125	170
-
 	// find 함수는 입력된 데이터랑 동일한 데이터가 있는지 찾아서 그 데이터를 가리키는 iterator 를 반환.
 	// 만약 해당 데이터가 컨테이너 안에 없었으면, end iterator 를 반환
 	set<int>::iterator iter = intset.find(125);
@@ -66,7 +84,48 @@ int main()
 
 	}
 
+	// map 사용
+	map<int, int> intmap;
 
+	intmap.insert(make_pair(100, 1));
+
+	intmap.insert(make_pair(150, 2));
+	intmap.insert(make_pair(170, 3));
+	intmap.insert(make_pair(125, 4));
+
+	intmap.insert(make_pair(80, 5));
+	intmap.insert(make_pair(90, 6));
+	intmap.insert(make_pair(50, 7));
+
+	//			 100-1
+	//		   /	   \
+	//		80-5	  150-2
+	//	   /    \	   /  \
+	//	  50-7  90-6 125-4 170-3
+
+	map<int, int>::iterator mapiter = intmap.find(50);
+
+	if (mapiter != intmap.end())
+	{
+		(*mapiter).first;
+		(*mapiter).second;
+	}
+
+	// BST insert 테스트
+	BST<int, float> bst;
+	bst.insert(make_bstpair(100, 1.1f));
+	bst.insert(make_bstpair(150, 2.2f));
+	bst.insert(make_bstpair(50, 2.2f));
+	bst.insert(make_bstpair(170, 1.1f));
+	bst.insert(make_bstpair(125, 2.2f));
+	bst.insert(make_bstpair(25, 2.2f));
+	bst.insert(make_bstpair(75, 2.2f));
+
+	//			    100
+	//		 50				150
+	//	  25	75		125		170
+
+	bst.Circit();
 
 	return 0;
 }
