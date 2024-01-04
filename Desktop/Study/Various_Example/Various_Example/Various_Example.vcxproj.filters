@@ -21,6 +21,12 @@
     <Filter Include="exam4">
       <UniqueIdentifier>{05120d4d-9945-45f1-b4a5-7adac44c9dcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="List">
+      <UniqueIdentifier>{bc32fc44-0424-46f0-a199-d6389177b5b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tree">
+      <UniqueIdentifier>{f525da8f-2f9e-4958-b56f-b6b6bc387ff0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="1.Multiplication_Table.cpp">
@@ -89,6 +95,12 @@
     <ClCompile Include="main4.cpp">
       <Filter>exam4</Filter>
     </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>List</Filter>
+    </ClCompile>
+    <ClCompile Include="BST.cpp">
+      <Filter>Tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="6-2.Extern.h">
@@ -105,6 +117,12 @@
     </ClInclude>
     <ClInclude Include="CArr.h">
       <Filter>exam4</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>List</Filter>
+    </ClInclude>
+    <ClInclude Include="BST.h">
+      <Filter>Tree</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
