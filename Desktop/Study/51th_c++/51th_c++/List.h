@@ -33,7 +33,15 @@ private:
 public:
 	void push_back(const T& _Data);
 	void push_front(const T& _Data);
+
+	T pop_front();
+	T pop_back();
+
 	int size() { return m_CurCount; }
+	bool empty()
+	{
+		return 0 == m_CurCount ? true : false;
+	}
 
 	class iterator;
 
@@ -200,6 +208,50 @@ inline void List<T>::push_front(const T& _Data)
 
 	m_pHead = pNewNode;
 	++m_CurCount;
+}
+
+template<typename T>
+T List<T>::pop_front()
+{
+	assert(m_pHead);
+
+	// 헤드노드가 들고있는 데이터를 복사해둔다.
+	T data = m_pHead->Data;
+
+	// 삭제할 헤드노드의 다음이 존재하지 않는다면 (데이터가 1개였다)
+	if (nullptr == m_pHead->pNext)
+	{
+		// 헤드노드를 삭제한다.
+		delete m_pHead;
+
+		// 헤드, 테일 포인터를 nullptr 로 만든다.
+		m_pHead = nullptr;
+		m_pTail = nullptr;
+	}
+	else
+	{
+		// 삭제할 헤드의 다음을 새로운 헤드로 지정한다.
+		m_pHead = m_pHead->pNext;
+
+		// 새로지정한 헤드의 이전이 삭제할 원래 해드노드였다.
+		delete m_pHead->pPrev;
+
+		// 새로 지정한 헤드의 이전을 nullptr 만든다.
+		m_pHead->pPrev = nullptr;
+	}
+
+	// 데이터 개수를 하나 줄인다.
+	--m_CurCount;
+
+	// 삭제한 헤드노드에 저장해두었던 데이터를 반환해준다.
+	return data;
+}
+
+template<typename T>
+T List<T>::pop_back()
+{
+
+	return T();
 }
 
 

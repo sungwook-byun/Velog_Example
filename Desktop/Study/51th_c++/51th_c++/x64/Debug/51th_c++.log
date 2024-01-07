@@ -1,2 +1,8 @@
 ﻿  main23.cpp
-  51th_c++.vcxproj -> C:\Users\qustj\Desktop\Study\51th_c++\x64\Debug\51th_c++.exe
+C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\BST.h(164,6): error C2760: 구문 오류: 여기서 'm_TargetNode'은(는) 예상치 못한 오류였습니다. 예상된 오류는 ';'였습니다
+  (소스 파일 'main23.cpp'을(를) 컴파일하는 중)
+  C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\BST.h(164,6):
+  템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+  	C:\Users\qustj\Desktop\Study\51th_c++\51th_c++\BST.h(194,2):
+  	컴파일되는 클래스 템플릿 인스턴스화 'BST<T1,T2>'에 대한 참조를 확인하세요.
+  

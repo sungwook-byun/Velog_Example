@@ -126,6 +126,8 @@ int main()
 	//	  25	75		125		170
 
 	bst.Circit();
+	BST<int, float>::iterator myiter = bst.begin();
+
 
 	return 0;
 }

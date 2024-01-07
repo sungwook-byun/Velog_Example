@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
+#include <assert.h>
 
-
-
+#include "List.h"
 
 
 // Binary Search Tree(BST)
@@ -27,13 +27,20 @@ template<typename T1, typename T2>
 struct BSTNode
 {
 	BSTPair<T1, T2> pair;
+
 	BSTNode* pParent;
 	BSTNode* pLeftChild;
 	BSTNode* pRightChild;
 
+	bool HasRightChild() { return pRightChild; }
+	bool HasLeftChild() { return pLeftChild; }
 
-	// BSTPair<T1, T2> pair; 는 구조체의 인스턴스 이기 때문에 자동으로 기본 생성자가 호출된다. 
-	// 그렇다면 위에서 초기화로 넣어준 first,second가 기본값으로 설정되기 때문에 따로 다시 설정할 필요가 없음.
+	bool IsLeftChild() { pParent->pLeftChild == this; }
+	bool IsRightChild() { pParent->pRightChild == this; }
+
+	bool IsRoot() { return !pParent; }
+
+
 	BSTNode()
 		: pParent(nullptr)
 		, pLeftChild(nullptr)
@@ -67,7 +74,20 @@ public:
 private:
 	void Circit(BSTNode<T1, T2>* _Node);
 
-	//class iterator;
+public:
+	class iterator;
+	iterator begin()
+	{
+		assert(m_Root);
+
+		BSTNode<T1, T2>* pNode = m_Root;
+
+		while (pNode->pLeftChild) { pNode = pNode->pLeftChild; }
+
+		return iterator(this, pNode);
+	}
+
+	//iterator end();
 	//iterator find(const T1& _key);
 
 
@@ -81,13 +101,96 @@ public:
 	~BST()
 	{
 		// 모든 노드들을 삭제
-		// 재귀함수
+		// 재귀함수		
+
+		// 레벨순회
+		List<BSTNode<T1, T2>*> queue;
+
+		queue.push_back(m_Root);
+
+		while (!queue.empty())
+		{
+			BSTNode<T1, T2>* pNode = queue.pop_front();
+
+			if (nullptr != pNode->pLeftChild)
+				queue.push_back(pNode->pLeftChild);
+
+			if (nullptr != pNode->pRightChild)
+				queue.push_back(pNode->pRightChild);
+
+			delete pNode;
+		}
 	}
 
-	/*class iterator
-	{
 
-	};*/
+	class iterator
+	{
+	private:
+		BST* m_Owner;
+		BSTNode<T1, T2>* m_TargetNode;
+
+	public:
+		iterator& operator ++()
+		{
+			// 오른쪽 자식이 있으면 
+			if (m_TargetNode->HasRightChild())
+			{
+				// 오른쪽 자식으로 간다.
+				BSTNode<T1, T2>* pNextNode = m_TargetNode->pRightChild;
+
+				// 왼쪽자식이 없을 때 까지 내려간다.
+				while (pNextNode->pLeftChild) { pNextNode = pNextNode->pLeftChild; }
+				m_TargetNode = pNextNode;
+			}
+
+			// 오른쪽 자식이 없으며
+			else
+			{
+				BSTNode<T1, T2>* pNextNode = m_TargetNode;
+
+				// 부모의 왼쪽 자식일때 까지 올라가서 그때 부모가 나의 후속자
+				do {
+					if (pNextNode->IsRoot())
+					{
+						// end iterator
+						break;
+					}
+					else
+					{
+						pNextNode = pNextNode->pParent;
+					}
+				} while (!pNextNode->IsLeftChild())
+
+					m_TargetNode = pNextNode->pParent;
+			}
+
+			return (*this);
+		}
+
+		iterator& operator--()
+		{
+
+
+
+			return (*this);
+		}
+
+
+
+
+
+
+	public:
+		iterator()
+			: m_Owner(nullptr)
+			, m_TargetNode(nullptr)
+		{}
+
+		iterator(BST* _Owner, BSTNode<T1, T2>* _Node)
+			: m_Owner(_Owner)
+			, m_TargetNode(_Node)
+		{}
+	};
 };
 
 // 입력된 T1, T2 타입의 데이터를 묶어서 BSTPair<T1, T2> 타입 구조체로 반환
@@ -161,8 +264,11 @@ inline void BST<T1, T2>::Circit(BSTNode<T1, T2>* _Node)
 		return;
 	}
 
-	std::cout << _Node->pair.first << std::endl;
+
 
 	Circit(_Node->pLeftChild);
+
+	//std::cout << _Node->pair.first << std::endl;
+
 	Circit(_Node->pRightChild);
 }
