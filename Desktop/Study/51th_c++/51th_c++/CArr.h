@@ -81,7 +81,7 @@ public:
 		{
 			return !((*this) == _otheriter);
 		}
-	
+
 		iterator& operator ++()
 		{
 			if (m_pOwner && -1 == m_Idx)
@@ -97,36 +97,50 @@ public:
 			{
 				m_Idx = -1;
 			}
-			return *this;
-		}
 
-		iterator& operator --()
-		{
-			if (m_pOwner && 0 == m_Idx)
-			{
-				// begin iteartor 에 -- 함수를 호출한 경우
-				assert(nullptr);
-			}
-			return *this;
+			return (*this);
 		}
 
 		iterator operator ++(int)
 		{
-			iterator CopyIter = *this;
+			iterator copy(*this);
 
 			++(*this);
 
-			return CopyIter;
+			return copy;
+		}
+
+		iterator& operator --()
+		{
+			// iterator 가 정상적인 상태가 아니거나, begin iterator 인 경우
+			assert(m_pOwner && m_Idx);
+
+			// 만약 end iterator 에게 -- 를 호출하면
+			if (-1 == m_Idx)
+			{
+				// 데이터가 하나도 없는데 마지막 데이터를 가리키려고 하는 경우
+				assert(m_pOwner->m_CurCount);
+
+				// 가장 마지막 데이터를 가리킨다.
+				m_Idx = m_pOwner->m_CurCount - 1;
+			}
+			else
+			{
+				--m_Idx;
+			}
+
+			return *this;
 		}
 
 		iterator operator --(int)
 		{
-			iterator CopyIter = *this;
+			iterator copy(*this);
 
-			++(*this);
+			--(*this);
 
-			return CopyIter;
+			return copy;
 		}
+
 
 
 

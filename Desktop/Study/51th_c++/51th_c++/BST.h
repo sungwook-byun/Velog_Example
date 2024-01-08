@@ -6,6 +6,7 @@
 #include "List.h"
 
 
+
 // Binary Search Tree(BST)
 template<typename T1, typename T2>
 struct BSTPair
@@ -35,11 +36,12 @@ struct BSTNode
 	bool HasRightChild() { return pRightChild; }
 	bool HasLeftChild() { return pLeftChild; }
 
-	bool IsLeftChild() { pParent->pLeftChild == this; }
-	bool IsRightChild() { pParent->pRightChild == this; }
+	bool IsLeftChild() { return pParent->pLeftChild == this; }
+	bool IsRightChild() { return pParent->pRightChild == this; }
 
 	bool IsRoot() { return !pParent; }
-
+	bool IsLeaf() { return !(pLeftChild || pRightChild); }
+	bool IsFull() { return pLeftChild && pRightChild; }
 
 	BSTNode()
 		: pParent(nullptr)
@@ -62,8 +64,9 @@ private:
 	BSTNode<T1, T2>* m_Root;		// 루트 노드 주소
 	int					m_CurCount;	// 현재 데이터 개수
 
-public:
-	void insert(const BSTPair<T1, T2>& _pair);
+
+
+
 
 public:
 	void Circit()
@@ -76,6 +79,13 @@ private:
 
 public:
 	class iterator;
+
+	void insert(const BSTPair<T1, T2>& _pair);
+
+	iterator find(const T1& _key);
+
+	iterator erase(const iterator& _target);
+
 	iterator begin()
 	{
 		assert(m_Root);
@@ -87,9 +97,10 @@ public:
 		return iterator(this, pNode);
 	}
 
-	//iterator end();
-	//iterator find(const T1& _key);
-
+	iterator end()
+	{
+		return iterator(this, nullptr);
+	}
 
 
 public:
@@ -128,10 +139,38 @@ public:
 	private:
 		BST* m_Owner;
 		BSTNode<T1, T2>* m_TargetNode;
+		wchar_t				m_szDesc[6];	// 설명 정보
+		// end iterator 조건
+		// m_Owner 가 nullptr 이 아니고 m_TargetNode 가 nullptr 이면...
 
 	public:
+		const BSTPair<T1, T2>& operator* ()
+		{
+			assert(m_Owner && m_TargetNode);
+
+			return m_TargetNode->pair;
+		}
+
+
+		bool operator == (const iterator& _otheriter)
+		{
+			if (m_Owner == _otheriter.m_Owner && m_TargetNode == _otheriter.m_TargetNode)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		bool operator != (const iterator& _otheriter)
+		{
+			return !((*this) == _otheriter);
+		}
+
+
 		iterator& operator ++()
 		{
+			// 중위 후속자(InOrder Successor)
+
 			// 오른쪽 자식이 있으면 
 			if (m_TargetNode->HasRightChild())
 			{
@@ -143,25 +182,32 @@ public:
 				m_TargetNode = pNextNode;
 			}
 
-			// 오른쪽 자식이 없으며
+			// 오른쪽 자식이 없으면
 			else
 			{
 				BSTNode<T1, T2>* pNextNode = m_TargetNode;
 
-				// 부모의 왼쪽 자식일때 까지 올라가서 그때 부모가 나의 후속자
-				do {
+				// 부모의 왼쪽 자식일때 까지 올라가서 그때 부모가 나의 중위 후속자
+				while (true)
+				{
 					if (pNextNode->IsRoot())
 					{
+						// 현재 노드가 가장 마지막 노드이다(중위 후속자를 찾기전에 루트노드에 도달)
 						// end iterator
+						m_TargetNode = nullptr;
+						wcscpy_s(m_szDesc, L"End");
+						return (*this);
+					}
+					else if (pNextNode->IsLeftChild())
+					{
+						m_TargetNode = pNextNode->pParent;
 						break;
 					}
 					else
 					{
 						pNextNode = pNextNode->pParent;
 					}
-				} while (!pNextNode->IsLeftChild())
-
-					m_TargetNode = pNextNode->pParent;
+				};
 			}
 
 			return (*this);
@@ -169,27 +215,60 @@ public:
 
 		iterator& operator--()
 		{
+			// end iterator인 경우 --를 하면 마지막 노드로 가야하니 맨 오른쪽 노드를 찾아야함
+			if (nullptr == m_TargetNode)
+			{
+				// 가장 오른쪽 노드를 찾기 위해 트리의 루트에서 시작하는 임시 노드를 설정합니다.
+				BSTNode<T1, T2>* pPrevNode = m_Owner->m_Root;
 
+				// 트리를 오른쪽으로 이동하면서 가장 오른쪽 노드를 찾습니다.
+				while (pPrevNode->pRightChild) { pPrevNode = pPrevNode->pRightChild; }
 
+				// 그렇게 찾은 가장 오른쪽 노드를 타겟노드에 넣으면 맨 오른쪽 노드를 가르킴
+				m_TargetNode = pPrevNode;
 
-			return (*this);
+				return *this;
+			}
+
+			// 왼쪽 자식이 있는경우이며 서브트리에서 가장 오른쪽에 있는 노드를 찾음
+			if (m_TargetNode->HasLeftChild())
+			{
+				BSTNode<T1, T2>* pPrevNode = m_TargetNode->pLeftChild;
+
+				while (pPrevNode->pRightChild) { pPrevNode = pPrevNode->pRightChild; }
+
+				m_TargetNode = pPrevNode;
+			}
+			else
+			{
+				// 왼쪽 자식이 없으면 부모노드를 찾음
+				while (m_TargetNode->IsLeftChild()) { m_TargetNode = m_TargetNode->pParent; }
+
+				m_TargetNode = m_TargetNode->pParent;
+			}
+			return *this;
 		}
-
-
-
-
-
 
 	public:
 		iterator()
 			: m_Owner(nullptr)
 			, m_TargetNode(nullptr)
-		{}
+			, m_szDesc{}
+		{
+			wcscpy_s(m_szDesc, L"None");
+		}
 
 		iterator(BST* _Owner, BSTNode<T1, T2>* _Node)
 			: m_Owner(_Owner)
 			, m_TargetNode(_Node)
-		{}
+			, m_szDesc{}
+		{
+			if (nullptr != m_Owner && nullptr == m_TargetNode)
+			{
+				wcscpy_s(m_szDesc, L"End");
+			}
+		}
+		friend class BST<T1, T2>;
 	};
 };
 
@@ -271,4 +350,51 @@ inline void BST<T1, T2>::Circit(BSTNode<T1, T2>* _Node)
 	//std::cout << _Node->pair.first << std::endl;
 
 	Circit(_Node->pRightChild);
+}
+
+template<typename T1, typename T2>
+typename BST<T1, T2>::iterator BST<T1, T2>::find(const T1& _key)
+{
+	BSTNode<T1, T2>* pNode = m_Root;
+
+	while (pNode)
+	{
+		if (_key < pNode->pair.first)
+		{
+			pNode = pNode->pLeftChild;
+		}
+		else if (pNode->pair.first < _key)
+		{
+			pNode = pNode->pRightChild;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return iterator(this, pNode);
+}
+
+template<typename T1, typename T2>
+typename BST<T1, T2>::iterator BST<T1, T2>::erase(const iterator& _target)
+{
+	// 삭제할 노드가 리프노드인 경우 (자식이 0개)
+	if (_target.m_TargetNode->IsLeaf())
+	{
+
+	}
+
+	// 자식이 2개 있는 경우
+	else if (_target.m_TargetNode->IsFull())
+	{
+
+	}
+
+	// 자식이 1개 있는 경우
+	else
+	{
+
+	}
+
+	return iterator();
 }

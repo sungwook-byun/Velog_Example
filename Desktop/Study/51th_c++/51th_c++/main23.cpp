@@ -1,5 +1,8 @@
 #include <iostream>
 
+using std::cout;
+using std::endl;
+
 #include "BST.h"
 
 
@@ -128,6 +131,42 @@ int main()
 	bst.Circit();
 	BST<int, float>::iterator myiter = bst.begin();
 
+	//for (; myiter != bst.end(); ++myiter)
+	//{
+	//	cout << (*myiter).first << endl;
+	//}
+
+	//--myiter;
+
+	BST<int, float>::iterator myiter2 = bst.end();
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+	--myiter2;
+	cout << (*myiter2).first << endl;
+
+
+	myiter = bst.find(74);
+
+	BST<int, float>::iterator TestIter;
 
 	return 0;
 }
+
+// 중위 선행자 구하기
+// BST iterator -- 구현하기
+
+// erase 구현 마무리
+// iterator -> operator
+// 문자열 키값 사용
