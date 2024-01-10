@@ -152,6 +152,13 @@ public:
 			return m_TargetNode->pair;
 		}
 
+		const BSTPair<T1, T2>* operator-> ()
+		{
+			assert(m_Owner && m_TargetNode);
+
+			return &m_TargetNode->pair;
+		}
+
 
 		bool operator == (const iterator& _otheriter)
 		{
@@ -380,7 +387,21 @@ typename BST<T1, T2>::iterator BST<T1, T2>::erase(const iterator& _target)
 	// 자식이 2개 있는 경우
 	else if (_target.m_TargetNode->IsFull())
 	{
+		// 삭제할 노드의 후속자를 찾는다.
+		pSuccessor = FindInOrderSuccessor(_target.m_TargetNode);
+		assert(pSuccessor);
 
+		// 중위 후속자 노드의 데이터를 삭제할 노드의 데이터로 복사시킨다.
+		_target.m_TargetNode->pair = pSuccessor->pair;
+
+		// 자식이 2개인 노드의 후속자는 자식이 1개 또는 0개 이다.
+		// erase 함수를 재귀호출해서 자식이 1개 or 0 개인 노드를 삭제하는 부분을 해결한다.
+		// 이때 erase 안에서 데이터 개수를 줄이므로 여기서 다시 또 데이터개수를 줄일 필요가 없다.
+		erase(iterator(this, pSuccessor));
+
+		// 삭제된 노드의 후속자가 가진 데이터가 삭제할 노드로 복사되었기 때문에
+		// 원래 삭제하려고 했던 노드가 다시 삭제된 다음노드가 되었다.
+		return iterator(this, _target.m_TargetNode);
 	}
 
 	// 자식이 1개 있는 경우
@@ -388,8 +409,22 @@ typename BST<T1, T2>::iterator BST<T1, T2>::erase(const iterator& _target)
 	{
 		pSuccessor = FindInOrderSuccessor(_target.m_TargetNode);
 
+		// 삭제할 노드가 루트인 경우
+		if (_target.m_TargetNode->IsRoot())
+		{
+			// 하나뿐인 자식을 루트로 만든다.
+			if (_target.m_TargetNode->HasLeftChild())
+			{
+				m_Root = _target.m_TargetNode->pLeftChild;
+			}
+			else
+			{
+				m_Root = _target.m_TargetNode->pRightChild;
+			}
+			m_Root->pParent = nullptr;
+		}
 		// 삭제할 노드가 왼쪽 자식이다.
-		if (_target.m_TargetNode->IsLeftChild())
+		else if (_target.m_TargetNode->IsLeftChild())
 		{
 			// 보유한 자식이 왼쪽 자식이다.
 			if (_target.m_TargetNode->HasLeftChild())
@@ -411,17 +446,24 @@ typename BST<T1, T2>::iterator BST<T1, T2>::erase(const iterator& _target)
 		{
 			if (_target.m_TargetNode->HasLeftChild())
 			{
-
+				_target.m_TargetNode->pLeftChild->pParent = _target.m_TargetNode->pParent;
+				_target.m_TargetNode->pParent->pRightChild = _target.m_TargetNode->pLeftChild;
 			}
 			else
 			{
-
+				_target.m_TargetNode->pRightChild->pParent = _target.m_TargetNode->pParent;
+				_target.m_TargetNode->pParent->pRightChild = _target.m_TargetNode->pRightChild;
 			}
 		}
 
-	}
+		// 해당 노드를 메모리 해제한다.
+		delete _target.m_TargetNode;
 
-	return iterator();
+		// 데이터 개수를 하나 줄인다.
+		--m_CurCount;
+
+		return iterator(this, pSuccessor);
+	}
 }
 
 template<typename T1, typename T2>

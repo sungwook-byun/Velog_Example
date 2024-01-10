@@ -132,6 +132,9 @@
     <ClCompile Include="main23.cpp">
       <Filter>DataStructure\BinarySearchTree</Filter>
     </ClCompile>
+    <ClCompile Include="main_enum.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">

@@ -55,8 +55,25 @@ using std::make_pair;
 // 인덱싱		 O(1)			O(N)			 O(N)
 // 탐색			 O(N)			O(N)			 O(logN)
 
+struct test
+{
+	int first;
+	int second;
+};
+
 int main()
 {
+	test t = {};
+
+	test* pTest = &t;
+
+	(*pTest).first;
+	(*pTest).second;
+
+	pTest->first;
+	pTest->second;
+
+
 	set<int> intset;
 
 	intset.insert(100);
@@ -146,8 +163,19 @@ int main()
 	--TestIter;
 	--TestIter;
 
-	TestIter = bst.begin();
-	TestIter = bst.erase(TestIter);
+	TestIter = bst.find(100);
+
+	(*TestIter).first;
+	(*TestIter).second;
+
+	TestIter->first;
+	TestIter->second;
+
+	if (bst.end() != TestIter)
+	{
+		bst.erase(TestIter);
+	}
+
 
 	return 0;
 }
@@ -157,5 +185,3 @@ int main()
 
 // 1. erase 구현 마무리
 // 2. iterator -> operator
-// 3. 문자열 키값 사용
-
