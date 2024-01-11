@@ -1,6 +1,7 @@
 #include "Str.h"
 
 #include <iostream>
+#include <assert.h>
 
 Str::Str()
 	: m_pStr(nullptr)
@@ -115,30 +116,115 @@ void Str::operator+=(const wchar_t* _Str)
 
 bool Str::operator==(const Str& _Other) const
 {
-	return false;
+	// 각 객체의 문자열의 길이가 동일하지 않으면 같지 않음
+	if (m_Length != _Other.m_Length)
+		return false;
+
+	// 모든 문자가 같은지 비교
+	for (int i = 0; i < m_Length; ++i)
+	{
+		// 중간에 하나라도 다르면 두 문자열은 같지 않음
+		if (m_pStr[i] != _Other.m_pStr[i])
+		{
+			return false;
+		}
+	}
+
+	// 문자열의 길이가 같고, 모든 문자가 동일하면 두 문자열은 같은 문자열이다.
+	return true;
 }
 
 bool Str::operator!=(const Str& _Other)const
 {
-	return false;
+	return !((*this) == _Other);
 }
 
 bool Str::operator<(const Str& _Other)const
 {
-	return false;
+	// 비교하려는 두 문자열이 모두 문자가 하나도 없다면 비교할 수 없다.
+	assert(m_Length || _Other.m_Length);
+
+	int MinLen = m_Length < _Other.m_Length ? m_Length : _Other.m_Length;
+
+	for (int i = 0; i < MinLen; ++i)
+	{
+		if (m_pStr[i] < _Other.m_pStr[i])
+			return true;
+		else if (m_pStr[i] > _Other.m_pStr[i])
+			return false;
+	}
+
+	// 모든 문자가 동일했다면 문자열이 길이가 더 짧은 문자열이 더 작다.
+	if (m_Length < _Other.m_Length)
+		return true;
+	else
+		return false;
 }
 
-bool Str::operator>(const Str& _Other)const
+bool Str::operator >(const Str& _Other)const
 {
-	return false;
+	// 비교하려는 두 문자열이 모두 문자가 하나도 없다면 비교할 수 없다.
+	assert(m_Length || _Other.m_Length);
+
+	int MinLen = m_Length < _Other.m_Length ? m_Length : _Other.m_Length;
+
+	for (int i = 0; i < MinLen; ++i)
+	{
+		if (m_pStr[i] > _Other.m_pStr[i])
+			return true;
+		else if (m_pStr[i] < _Other.m_pStr[i])
+			return false;
+	}
+
+	// 모든 문자가 동일했다면 문자열이 길이가 더 짧은 문자열이 더 작다.
+	if (m_Length > _Other.m_Length)
+		return true;
+	else
+		return false;
 }
 
 bool Str::operator<=(const Str& _Other)const
 {
-	return false;
+	// 비교하려는 두 문자열이 모두 문자가 하나도 없다면 비교할 수 없다.
+	if (!(m_Length || _Other.m_Length))
+		return true;
+
+	int MinLen = m_Length < _Other.m_Length ? m_Length : _Other.m_Length;
+
+	for (int i = 0; i < MinLen; ++i)
+	{
+		if (m_pStr[i] < _Other.m_pStr[i])
+			return true;
+		else if (m_pStr[i] > _Other.m_pStr[i])
+			return false;
+	}
+
+	// 모든 문자가 동일했다면 문자열이 길이가 더 짧은 문자열이 더 작다.
+	if (m_Length <= _Other.m_Length)
+		return true;
+	else
+		return false;
 }
 
 bool Str::operator>=(const Str& _Other)const
 {
-	return false;
+	// 비교하려는 두 문자열이 모두 문자가 하나도 없다면 비교할 수 없다.
+	if (!(m_Length || _Other.m_Length))
+		return true;
+
+	int MinLen = m_Length < _Other.m_Length ? m_Length : _Other.m_Length;
+
+	for (int i = 0; i < MinLen; ++i)
+	{
+		if (m_pStr[i] > _Other.m_pStr[i])
+			return true;
+		else if (m_pStr[i] < _Other.m_pStr[i])
+			return false;
+	}
+
+	// 모든 문자가 동일했다면 문자열이 길이가 더 짧은 문자열이 더 작다.
+	if (m_Length >= _Other.m_Length)
+		return true;
+	else
+		return false;
 }

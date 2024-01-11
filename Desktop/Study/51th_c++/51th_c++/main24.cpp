@@ -1,10 +1,12 @@
 #include <iostream>
 
+#include "BST.h"
 #include "Str.h"
-
 #include <map>
 using std::map;
 using std::make_pair;
+
+#include <string.h>
 
 int main()
 {
@@ -24,15 +26,35 @@ int main()
 	wchar_t szName[20] = L"Father";
 	mapData.find(szName);
 
-
 	map<Str, int> mapString;
 	mapString.insert(make_pair(L"Father", 0));
 	mapString.insert(make_pair(L"Mother", 1));
 	mapString.insert(make_pair(L"Brother", 2));
 	mapString.insert(make_pair(L"Sister", 3));
 
-	Str str(L"Father");
+	Str str1(L"Father");
+	Str str2(L"Father");
 
+	bool b = str1 < str2;
+
+
+
+	// 이진탐색트리의 키값을 Str 로 지정
+	BST<Str, int> mybst;
+
+	Str mystr(L"Test");
+
+	//BSTPair<Str, int> pair;
+	//mybst.insert();
+	//make_bstpair(L"Test", 0);
+
+	BSTPair<wchar_t[5], int> pair;
+	Str s = pair.first;
+
+
+	// map
+	std::string;
+	std::wstring;
 
 	return 0;
 }
