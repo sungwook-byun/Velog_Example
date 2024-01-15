@@ -139,9 +139,23 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="main24.cpp">
-      <Filter>DataStructure\BinarySearchTree</Filter>
+      <Filter>String</Filter>
     </ClCompile>
-    <ClCompile Include="Str.cpp" />
+    <ClCompile Include="Str.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="main25.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main27.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main26.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="main28.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">
@@ -162,6 +176,8 @@
     <ClInclude Include="BST.h">
       <Filter>DataStructure\BinarySearchTree</Filter>
     </ClInclude>
-    <ClInclude Include="Str.h" />
+    <ClInclude Include="Str.h">
+      <Filter>String</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
