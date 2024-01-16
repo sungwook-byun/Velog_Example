@@ -156,6 +156,9 @@
     <ClCompile Include="main28.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="main29.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math.h">

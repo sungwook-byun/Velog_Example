@@ -210,6 +210,7 @@
     </ClCompile>
     <ClCompile Include="main27.cpp" />
     <ClCompile Include="main28.cpp" />
+    <ClCompile Include="main29.cpp" />
     <ClCompile Include="main_enum.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>

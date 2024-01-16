@@ -1,4 +1,5 @@
 #include <iostream>
+#include <typeinfo>
 
 using std::cout;
 using std::endl;
@@ -34,6 +35,11 @@ public:
 public:
 	Parent() : m_Parent(0) {}
 	Parent(int _P) : m_Parent(_P) {}
+
+	virtual ~Parent()
+	{
+
+	}
 };
 
 
@@ -44,14 +50,25 @@ public:
 	int	m_Child;
 
 public:
-	void OutputMyData()
+	// Child 클래스 맴버함수
+	void SetChild(int _child) { m_Child = _child; }
+
+	// Child 클래스에서 추가된 가상함수
+	virtual void Test()
+	{
+
+	}
+
+	// 부모 클래스의 가상함수를 재정의 한 경우
+	virtual void OutputMyData() override
 	{
 		cout << "Child" << endl;
 		cout << "m_Parent : " << m_Parent << endl;
 		cout << "m_Child : " << m_Child << endl;
 	}
 
-	void VirtualFunc()
+	// 부모 클래스의 가상함수를 재정의 한 경우
+	virtual void VirtualFunc() override
 	{
 
 	}
@@ -59,6 +76,11 @@ public:
 public:
 	Child() :m_Child(0) {}
 	Child(int _P, int _C) : Parent(_P), m_Child(_C) {}
+
+	~Child()
+	{
+
+	}
 };
 
 
@@ -67,7 +89,6 @@ class ChidlChild
 {
 
 };
-
 
 int main()
 {
@@ -98,14 +119,58 @@ int main()
 	Child c3;
 	Child c4;
 
-
 	Parent* pPP = &c1;
 	pPP->VirtualFunc();
-
 
 	ChidlChild cc;
 	pPP = &cc;
 	pPP->VirtualFunc();
+
+	Parent* pParent = nullptr;
+
+	Child c5;
+	c5.SetChild(10);
+
+	pParent = &c5;
+
+	Child* pChild = &c5;
+	pChild->SetChild(10);
+
+
+	// 부모 클래스 포인터 타입으로 자식 클래스 객체의 주소를 가리킨 경우
+	// 가상함수는 테이블에 등록된 함수를 호출하기 때문에, 각 클래스에서 오버라이딩한 원래 버전을 사용할 수 있지만,
+	// 순수하게 자식클래스부터 구현된 함수는 부모 클래스 포인터로 알 수가 없다.
+
+	// 해결 방안
+	// 1. 다운 캐스팅
+	//  - 부모 클래스 포인터에 저장된 주소가 특정 자식클래스 객체임이 확실하다면,
+	//    해당 자식 클래스 포인터 타입으로 강제로 캐스팅해서 실제 그 객체를 온전히 접근하는 방법
+	((Child*)pParent)->SetChild(10); // 강제 캐스팅
+
+	// 2. RTTI(Runtime Type Idendification / Information )
+	// dynamic_cast
+	{
+		Child* pChild = dynamic_cast<Child*>(pParent);
+
+		if (pChild != nullptr)
+		{
+			pChild->SetChild(100);
+		}
+	}
+
+	// 특정 클래스의 타입 정보를 가져오기
+	const type_info& info = typeid(Parent);
+	unsigned __int64 id = info.hash_code();
+	const char* pClassName = info.name();
+
+
+
+	// 동적할당 클래스
+	Child* pChild = new Child;
+	delete pChild;
+
+	Parent* pParent = new Child;
+	delete pParent;
 
 
 	return 0;
